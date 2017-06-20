@@ -4,24 +4,24 @@
   </head>
   <body>
     <h1>けいじばん</h1>
-    <table border="1">
-      <caption>スレッド</caption>
-      <thread>
-        <tr>
-          <th>ID</th>
-          <th>投稿</th>
-          <th>日時</th>
-          <th>詳細</th>
-        </tr>
-      </thread>
-      <tbody>
-        <tr>
-          <td>100</td>
-          <td>こんにちは</td>
-          <td><%= @now %></td>
-          <td><a href="#">詳細</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <table>
+     <caption>連絡先一覧</caption>
+     <thead>
+       <tr>
+         <th>ID</th>
+         <th>タイトル</th>
+         <th>なにしてる?</th>
+       </tr>
+     </thead>
+     <tbody>
+       <% @threads.each do |thread| %>
+         <tr>
+           <td><%= thread.id %></td>
+           <td><%= thread.title %></td>
+           <td><%= thread.body %></td>
+         </tr>
+       <% end %>
+     </tbody>
+   </table>
   </body>
 </html>
