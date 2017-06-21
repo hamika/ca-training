@@ -14,11 +14,11 @@
        </tr>
      </thead>
      <tbody>
-       <% @threads.each do |thread| %>
+       <% @bbs_threads.each do |bbs_thread| %>
          <tr>
-           <td><%= thread.id %></td>
-           <td><%= thread.title %></td>
-           <td><%= thread.body %></td>
+           <td><%= bbs_thread.id %></td>
+           <td><%= bbs_thread.title %></td>
+           <td><%= bbs_thread.body %></td>
          </tr>
        <% end %>
      </tbody>

@@ -6,7 +6,7 @@ Bundler.require
 set :database, {adapter: "sqlite3", database: "bbs.sqlite3"}
 
 get '/' do
-  @threads = Thread.all
+  @bbs_threads = BbsThread.all
   erb :index
 end
 
