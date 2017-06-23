@@ -5,6 +5,11 @@ Bundler.require
 
 set :database, {adapter: "sqlite3", database: "bbs.sqlite3"}
 
+class BbsThread < ActiveRecord::Base
+  validates_presence_of :title
+  validates_presence_of :body
+end
+
 get '/' do
   @bbs_threads = BbsThread.all
   erb :index
