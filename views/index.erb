@@ -13,7 +13,6 @@
      <caption>連絡先一覧</caption>
      <thead>
        <tr>
-         <th>ID</th>
          <th>タイトル</th>
          <th>なにしてる?</th>
        </tr>
@@ -21,7 +20,6 @@
      <tbody>
        <% @bbs_threads.each do |bbs_thread| %>
          <tr>
-           <td><%= bbs_thread.id %></td>
            <td><%= bbs_thread.title %></td>
            <td><%= bbs_thread.body %></td>
          </tr>

@@ -20,5 +20,11 @@ get '/thread_new' do
 end
 
 post '/threads' do
-  erb :thread
+  p params
+  @bbs_thread = BbsThread.new({title: params[:title], body: params[:body]})
+  if @bbs_thread.save
+    redirect '/'
+  else
+    erb :thread
+  end
 end
