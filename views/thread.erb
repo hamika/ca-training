@@ -6,6 +6,10 @@
     <h1>新しいThread</h1>
     <form action="threads" method="post">
       <div>
+        <label for="thread_name">お名前</label>
+        <input type="text" name="name" id="thread_name">
+      </div>
+      <div>
         <label for="thread_title">タイトル</label>
         <input type="text" name="title" id="thread_title">
       </div>
@@ -16,10 +20,8 @@
       <input type="submit">
   </body>
   <footer>
-    <% if '/thread_new' %>
       <div>
         <a href="/">ホーム</a>
       </div>
-    <% end %>
   </footer>
 </html>

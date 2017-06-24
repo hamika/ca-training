@@ -10,21 +10,23 @@
   <body>
     <h1>けいじばん</h1>
     <table>
-     <caption>連絡先一覧</caption>
-     <thead>
-       <tr>
-         <th>タイトル</th>
-         <th>なにしてる?</th>
-       </tr>
-     </thead>
-     <tbody>
-       <% @bbs_threads.each do |bbs_thread| %>
-         <tr>
-           <td><%= bbs_thread.title %></td>
-           <td><%= bbs_thread.body %></td>
-         </tr>
-       <% end %>
-     </tbody>
-   </table>
+      <caption>連絡先一覧</caption>
+      <thead>
+        <tr>
+          <th>お名前</th>
+          <th>タイトル</th>
+          <th>なにしてる?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bbs_threads.each do |bbs_thread| %>
+          <tr>
+            <td><a href="/threads/<%= bbs_thread.id %>"><%= bbs_thread.name %></a></td>
+            <td><%= bbs_thread.title %></td>
+            <td><%= bbs_thread.body %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </body>
 </html>

@@ -5,13 +5,14 @@ Bundler.require
 
 set :database, {adapter: "sqlite3", database: "bbs.sqlite3"}
 
-class BbsThread < ActiveRecord::Base
+class BBS < ActiveRecord::Base
+  validates_presence_of :name
   validates_presence_of :title
   validates_presence_of :body
 end
 
 get '/' do
-  @bbs_threads = BbsThread.all
+  @bbs_threads = BBS.all
   erb :index
 end
 
@@ -21,10 +22,17 @@ end
 
 post '/threads' do
   p params
-  @bbs_thread = BbsThread.new({title: params[:title], body: params[:body]})
+  @bbs_thread = BBS.new({name:  params[:name],
+                         title: params[:title],
+                         body:  params[:body]})
   if @bbs_thread.save
     redirect '/'
   else
     erb :thread
   end
+end
+
+get '/threads/:id' do
+  @bbs_thread = BBS.find(params[:id])
+  erb :show
 end
