@@ -3,13 +3,17 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <h1><%= @bbs_thread.name %>さんのページ</h1>
+    <h1><%= @bbs_thread.name %>さんを削除しますか?</h1>
     <div>
       <ul>
         <li><%= @bbs_thread.title %></li>
         <li><%= @bbs_thread.body %></li>
       </ul>
     </div>
+    <form action="/users/<%= @bbs_thread.id %>" method="post">
+      <input name="_method" type="hidden" value="DELETE" />
+      <input type="submit">
+    </form>
   </body>
   <footer>
     <div>

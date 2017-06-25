@@ -3,8 +3,9 @@
     <meta chaeset="utf-8">
   </head>
   <body>
-    <h1>新しいThread</h1>
-    <form action="threads" method="post">
+    <h1><%= @bbs_thread.name %>さんの編集画面</h1>
+    <form action="/users/<%= @bbs_thread.id %>" method="post">
+      <input name="_method" type="hidden" value="PATCH" />
       <div>
         <label for="thread_name">お名前</label>
         <input type="text" name="name" id="thread_name">

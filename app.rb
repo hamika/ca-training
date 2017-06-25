@@ -12,11 +12,13 @@ class BBS < ActiveRecord::Base
 end
 
 get '/' do
+  p params
   @bbs_threads = BBS.all
   erb :index
 end
 
 get '/thread_new' do
+  p params
   erb :thread
 end
 
@@ -33,6 +35,19 @@ post '/threads' do
 end
 
 get '/threads/:id' do
+  p params
   @bbs_thread = BBS.find(params[:id])
   erb :show
+end
+
+get '/edit/:id' do
+  p params
+  @bbs_thread = BBS.find(params[:id])
+  erb :edit
+end
+
+get '/delete/:id' do
+  p params
+  @bbs_thread = BBS.find(params[:id])
+  erb :delete
 end

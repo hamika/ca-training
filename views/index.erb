@@ -21,9 +21,17 @@
       <tbody>
         <% @bbs_threads.each do |bbs_thread| %>
           <tr>
-            <td><a href="/threads/<%= bbs_thread.id %>"><%= bbs_thread.name %></a></td>
+            <td>
+              <a href="/threads/<%= bbs_thread.id %>"><%= bbs_thread.name %></a>
+            </td>
             <td><%= bbs_thread.title %></td>
             <td><%= bbs_thread.body %></td>
+            <td>
+              <a href="/edit/<%= bbs_thread.id %>">編集</a>
+            </td>
+            <td>
+              <a href="/delete/<%= bbs_thread.id %>">削除</a>
+            </td>
           </tr>
         <% end %>
       </tbody>
