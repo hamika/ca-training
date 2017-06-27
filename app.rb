@@ -43,19 +43,19 @@ end
 get '/edit/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  if @bbs_thread.update({name:  params[:name],
-                         title: params[:title],
-                         body:  params[:body]})
-    redirect '/'
-  else
-    erb :edit
-  end
+  erb :edit
 end
 
 post '/edit/:id' do
   p params
-  @bbs_thread = BBS.find(params[:id])
-  erb :edit
+  @bbs_thread = BBS.update(name:  params[:name],
+                           title: params[:title],
+                           body:  params[:body])
+  if @bbs_thread.save
+    redirect '/'
+  else
+    erb :edit
+  end
 end
 
 get '/delete/:id' do
