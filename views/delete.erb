@@ -10,8 +10,8 @@
         <li><%= @bbs_thread.body %></li>
       </ul>
     </div>
-    <form action="/users/<%= @bbs_thread.id %>" method="post">
-      <input name="_method" type="hidden" value="DELETE" />
+    <form action="/delete/<%= @bbs_thread.id %>" method="post">
+      <!-- <input name="_method" type="hidden" value="DELETE"> -->
       <input type="submit">
     </form>
   </body>
