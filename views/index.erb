@@ -2,35 +2,33 @@
   <head>
     <meta charset="utf-8">
   </head>
-  <header>
-    <div>
-      <a href="/thread_new">新規作成</a>
-    </div>
-  </header>
   <body>
-    <h1>けいじばん</h1>
+    <h1><%= erb :_title %></h1>
+    <div>
+      <a href="/new">新規作成</a>
+    </div>
     <table>
-      <caption>連絡先一覧</caption>
+      <caption>いちらん</caption>
       <thead>
         <tr>
-          <th>お名前</th>
-          <th>タイトル</th>
+          <th>件名</th>
+          <th>用件</th>
           <th>なにしてる?</th>
         </tr>
       </thead>
       <tbody>
-        <% @bbs_threads.each do |bbs_thread| %>
+        <% @bbs_thread.each do |b| %>
           <tr>
             <td>
-              <a href="/threads/<%= bbs_thread.id %>"><%= bbs_thread.name %></a>
+              <a href="/thread/<%= b.id %>"><%= b.name %></a>
             </td>
-            <td><%= bbs_thread.title %></td>
-            <td><%= bbs_thread.body %></td>
+            <td><%= b.title %></td>
+            <td><%= b.body %></td>
             <td>
-              <a href="/edit/<%= bbs_thread.id %>">編集</a>
+              <a href="/edit/<%= b.id %>">編集</a>
             </td>
             <td>
-              <a href="/delete/<%= bbs_thread.id %>">削除</a>
+              <a href="/delete/<%= b.id %>">削除</a>
             </td>
           </tr>
         <% end %>

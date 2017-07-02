@@ -17,20 +17,19 @@ end
 
 get '/' do
   p params
-  @bbs_threads = BBS.all
+  @bbs_thread = BBS.all
   erb :index
 end
 
-get '/thread_new' do
+get '/new' do
   p params
   erb :thread
 end
 
-post '/threads' do
+post '/thread' do
   p params
-  @bbs_thread = BBS.new({name:  params[:name],
-                         title: params[:title],
-                         body:  params[:body]})
+  @bbs_thread = BBS.new(params.slice(:name, :title, :body))
+  # @bbs_thread = BBS.new({name:  params[:name], title: params[:title], body:  params[:body]})
   if @bbs_thread.save
     redirect '/'
   else
@@ -38,7 +37,7 @@ post '/threads' do
   end
 end
 
-get '/threads/:id' do
+get '/thread/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
   erb :show
@@ -52,6 +51,12 @@ end
 
 post '/edit/:id' do
   p params
+  @bbs_thread = BBS.find(params[:id])
+  if @bbs_thread.update(params.slice(:name, :title, :body))
+    redirect '/'
+  else
+    erb :edit
+  end
   # @bbs_thread = BBS.find(params[:id])
   # @bbs_thread.name  = params[:name]
   # @bbs_thread.title = params[:title]
@@ -61,12 +66,6 @@ post '/edit/:id' do
   # else
   #   erb :edit
   # end
-  @bbs_thread = BBS.find(params[:id])
-  if @bbs_thread.update(params.slice(:name, :title, :body))
-    redirect '/'
-  else
-    erb :edit
-  end
 end
 
 get '/delete/:id' do
@@ -85,12 +84,18 @@ post '/delete/:id' do
   end
 end
 
+get '/comment/:id' do
+  p params
+  @bbs_thread = BBS.find(params[:id])
+  erb :comment
+end
+
 post '/comment/:id' do
   p params
-  @comments = Comment.new(params.slice(:name, :title, :body))
-  if @comments.save
+  @comment = Comment.new(params.slice(:name, :title, :body))
+  if @comment.save
     redirect '/'
   else
-    erb :edit
+    erb :comment
   end
 end
