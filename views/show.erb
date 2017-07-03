@@ -10,6 +10,23 @@
         <li><%= @bbs_threads.body %></li>
       </ul>
     </div>
+    <table>
+      <caption>コメント一覧</caption>
+      <thead>
+        <tr>
+          <th>だれ?</th>
+          <th>件名</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @comments.name %></td>
+          <td><%= @comments.title %></td>
+          <td><%= @comments.body %></td>
+        </tr>
+      </tbody>
+    </table>
   </body>
   <footer>
     <div>

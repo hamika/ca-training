@@ -40,6 +40,7 @@ end
 get '/threads/:id' do
   p params
   @bbs_threads = BBS.find(params[:id])
+  @comments = Comment.find(params[bbs_id: @bbs_threads])
   erb :show
 end
 
@@ -84,20 +85,19 @@ post '/delete/:id' do
   end
 end
 
-get '/comment/:id' do
+get '/comments/:id' do
   p params
-  @bbs_thread = BBS.find(params[:id])
+  @bbs_threads = BBS.find(params[:id])
   erb :comment
 end
 
-post '/comment/:id' do
+post '/threads/:id/comments' do
   p params
-  @bbs_thread = BBS.find(params[:id])
-  @comment = Comment.new({bbs_id: @bbs_thread,
+  @comments = Comment.new({bbs_id: @bbs_threads,
                           name:  params[:name],
                           title: params[:title],
                           body:  params[:body]})
-  if @comment.save
+  if @comments.save
     redirect '/'
   else
     erb :comment
