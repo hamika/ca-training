@@ -4,18 +4,18 @@
   </head>
   <body>
     <h1>新規コメント</h1>
-    <form action="comment" method="post">
+    <form action="/comment/<%= @bbs_threads.id %>" method="post">
       <div>
-        <label for="name">件名</label>
-        <input type="text" name="name" id="name">
+        <label for="comment_name">お名前</label>
+        <input type="text" name="name" id="comment_name">
       </div>
       <div>
-        <label for="title">用件</label>
-        <input type="text" name="title" id="title">
+        <label for="comment_title">タイトル</label>
+        <input type="text" name="title" id="comment_title">
       </div>
       <div>
-        <label for="body">なにしてる?</label>
-        <input type="text" name="body" id="body">
+        <label for="comment_body">なにしてる?</label>
+        <input type="text" name="body" id="comment_body">
       </div>
       <input type="submit">
     </form>
