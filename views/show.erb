@@ -1,17 +1,38 @@
 <html>
   <head>
-    <meta charset="utf-8">
+    <%= erb :_header %>
   </head>
   <body>
-      <h1><%= @bbs_thread.name %>さんのページ</h1>
+    <!-- threads -->
+    <h1><%= @bbs_thread.name %>さんのページ</h1>
+    <div>
+      <ul>
+        <li><%= @bbs_thread.title %></li>
+        <li><%= @bbs_thread.body %></li>
+      </ul>
+    </div>
+    <!-- comment forms -->
+    <h2>新規コメント</h2>
+    <form action="/threads/<%= @bbs_thread.id %>/comments" method="post">
       <div>
-        <ul>
-          <li><%= @bbs_thread.title %></li>
-          <li><%= @bbs_thread.body %></li>
-        </ul>
+        <label for="comment_name">お名前</label>
+        <input type="text" name="name" id="comment_name">
       </div>
+      <div>
+        <label for="comment_title">タイトル</label>
+        <input type="text" name="title" id="comment_title">
+      </div>
+      <div>
+        <label for="comment_body">なにしてる?</label>
+        <input type="text" name="body" id="comment_body">
+      </div>
+      <input type="submit">
+    </form>
+    <!-- comment tables -->
     <table>
-      <caption>コメント一覧</caption>
+      <caption>
+        <h2>コメント一覧</h2>
+      </caption>
       <thead>
         <tr>
           <th>だれ?</th>

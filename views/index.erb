@@ -1,8 +1,6 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="normalize.css" type="text/css">
-    <link rel="stylesheet" href="sakura.scss" type="text/css">
+    <%= erb :_header %>
   </head>
   <body>
     <h1><a href="/">けいじばん<a/></h1>
@@ -33,6 +31,11 @@
             </td>
             <td>
               <a href="/delete/<%= bbs_thread.id %>">削除</a>
+            </td>
+            <td>
+              <form action="/clones/<%= bbs_thread.id %>" method="post">
+                <input type="submit">
+              </form>
             </td>
           </tr>
         <% end %>
