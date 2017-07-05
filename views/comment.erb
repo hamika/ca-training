@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>新規コメント</h1>
-    <form action="/threads/<%= @bbs_threads.id %>/comments" method="post">
+    <form action="/threads/<%= @bbs_thread.id %>/comments" method="post">
       <div>
         <label for="comment_name">お名前</label>
         <input type="text" name="name" id="comment_name">

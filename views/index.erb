@@ -1,6 +1,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="normalize.css" type="text/css">
+    <link rel="stylesheet" href="sakura.scss" type="text/css">
   </head>
   <body>
     <h1><a href="/">けいじばん<a/></h1>
@@ -20,7 +22,9 @@
         <% @bbs_threads.each do |bbs_thread| %>
           <tr>
             <td>
-              <a href="/threads/<%= bbs_thread.id %>"><%= bbs_thread.name %></a>
+              <a href="/threads/<%= bbs_thread.id %>">
+                <%= bbs_thread.name %>
+              </a>
             </td>
             <td><%= bbs_thread.title %></td>
             <td><%= bbs_thread.body %></td>

@@ -3,8 +3,8 @@
     <meta chaeset="utf-8">
   </head>
   <body>
-    <h1><%= @bbs_threads.name %>さんの編集画面</h1>
-    <form action="/edit/<%= @bbs_threads.id %>" method="post">
+    <h1><%= @bbs_thread.name %>さんの編集画面</h1>
+    <form action="/edit/<%= @bbs_thread.id %>" method="post">
       <div>
         <label for="thread_name">お名前</label>
         <input type="text" name="name" id="thread_name">

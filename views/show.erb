@@ -3,13 +3,13 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <h1><%= @bbs_threads.name %>さんのページ</h1>
-    <div>
-      <ul>
-        <li><%= @bbs_threads.title %></li>
-        <li><%= @bbs_threads.body %></li>
-      </ul>
-    </div>
+      <h1><%= @bbs_thread.name %>さんのページ</h1>
+      <div>
+        <ul>
+          <li><%= @bbs_thread.title %></li>
+          <li><%= @bbs_thread.body %></li>
+        </ul>
+      </div>
     <table>
       <caption>コメント一覧</caption>
       <thead>
@@ -20,11 +20,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><%= @comments.name %></td>
-          <td><%= @comments.title %></td>
-          <td><%= @comments.body %></td>
-        </tr>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td><%= comment.name %></td>
+            <td><%= comment.title %></td>
+            <td><%= comment.body %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </body>

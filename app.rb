@@ -28,9 +28,9 @@ end
 
 post '/threads' do
   p params
-  @bbs_threads = BBS.new(params.slice(:name, :title, :body))
+  @bbs_thread = BBS.new(params.slice(:name, :title, :body))
   # @bbs_thread = BBS.new({name:  params[:name], title: params[:title], body:  params[:body]})
-  if @bbs_threads.save
+  if @bbs_thread.save
     redirect '/'
   else
     erb :thread
@@ -39,21 +39,23 @@ end
 
 get '/threads/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
-  @comments = Comment.find(params[bbs_id: @bbs_threads])
+  @bbs_thread = BBS.find(params[:id])
+  @comments = Comment.where(id: "2")
+  # @comments = Comment.where(title: 'いま')
+  # @comments = Comment.where(params[bbs_id: @bbs_threads])
   erb :show
 end
 
 get '/edit/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
+  @bbs_thread = BBS.find(params[:id])
   erb :edit
 end
 
 post '/edit/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
-  if @bbs_threads.update(params.slice(:name, :title, :body))
+  @bbs_thread = BBS.find(params[:id])
+  if @bbs_thread.update(params.slice(:name, :title, :body))
     redirect '/'
   else
     erb :edit
@@ -71,14 +73,14 @@ end
 
 get '/delete/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
+  @bbs_thread = BBS.find(params[:id])
   erb :delete
 end
 
 post '/delete/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
-  if @bbs_threads.delete
+  @bbs_thread = BBS.find(params[:id])
+  if @bbs_thread.delete
     redirect '/'
   else
     erb :delete
@@ -87,16 +89,17 @@ end
 
 get '/comments/:id' do
   p params
-  @bbs_threads = BBS.find(params[:id])
+  @bbs_thread = BBS.find(params[:id])
   erb :comment
 end
 
 post '/threads/:id/comments' do
   p params
-  @comments = Comment.new({bbs_id: @bbs_threads,
-                          name:  params[:name],
-                          title: params[:title],
-                          body:  params[:body]})
+  @bbs_thread = BBS.find(params[:id])
+  @comments = Comment.new({bbs_id: @bbs_thread,
+                           name:  params[:name],
+                           title: params[:title],
+                           body:  params[:body]})
   if @comments.save
     redirect '/'
   else
