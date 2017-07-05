@@ -87,22 +87,26 @@ post '/delete/:id' do
   end
 end
 
-get '/comments/:id' do
-  p params
-  @bbs_thread = BBS.find(params[:id])
-  erb :comment
-end
-
 post '/threads/:id/comments' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.new({bbs_id: @bbs_thread,
-                           name:  params[:name],
-                           title: params[:title],
-                           body:  params[:body]})
+  @comments = Comment.new({bbs_id: params[:id],
+                           name:   params[:name],
+                           title:  params[:title],
+                           body:   params[:body]})
   if @comments.save
     redirect '/'
   else
     erb :comment
+  end
+end
+
+post '/clones/:id' do
+  @bbs_thread = BBS.find(params[:id])
+  clone_obj = @bbs_thread.clone
+  if clone_obj.save
+    redirect '/'
+  else
+    erb :index
   end
 end
