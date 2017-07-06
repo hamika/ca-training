@@ -13,6 +13,11 @@ class BBS < ActiveRecord::Base
 end
 
 class Comment < ActiveRecord::Base
+  belongs_to :bbs
+  validates_presence_of :bbs_id
+  validates_presence_of :name
+  validates_presence_of :title
+  validates_presence_of :body
 end
 
 get '/' do
@@ -40,8 +45,7 @@ end
 get '/threads/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.where(id: "2")
-  # @comments = Comment.where(title: 'いま')
+  @comments = Comment.where(bbs_id: @bbs_thread)
   # @comments = Comment.where(params[bbs_id: @bbs_threads])
   erb :show
 end
@@ -90,10 +94,10 @@ end
 post '/threads/:id/comments' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.new({bbs_id: params[:id],
-                           name:   params[:name],
-                           title:  params[:title],
-                           body:   params[:body]})
+  @comments = Comment.new(params.slice(bbs_id: bbs[:id],
+                                       :name,
+                                       :title,
+                                       :body))
   if @comments.save
     redirect '/'
   else
