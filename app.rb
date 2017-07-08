@@ -94,10 +94,10 @@ end
 post '/threads/:id/comments' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.new(params.slice(bbs_id: bbs[:id],
-                                       :name,
-                                       :title,
-                                       :body))
+  @comments = Comment.new(bbs_id: params[:id],
+                          name:   params[:name],
+                          title:  params[:title],
+                          body:   params[:body])
   if @comments.save
     redirect '/'
   else
@@ -106,9 +106,19 @@ post '/threads/:id/comments' do
 end
 
 post '/clones/:id' do
-  @bbs_thread = BBS.find(params[:id])
-  clone_obj = @bbs_thread.clone
-  if clone_obj.save
+  bbs = BBS.find(params[:id])
+  ary = Array.new
+  ary << bbs.name
+      << bbs.title
+      << bbs.body
+  ary.shuffle!
+  copy_obj = BBS.new(name:  ary[0],
+                     title: ary[1],
+                     body:  ary[2])
+  # copy_obj = BBS.new(name:   bbs.name,
+  #                    title:  bbs.title,
+  #                    body:   bbs.body)
+  if copy_obj.save
     redirect '/'
   else
     erb :index
