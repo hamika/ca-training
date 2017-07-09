@@ -16,15 +16,15 @@
     <form action="/threads/<%= @bbs_thread.id %>/comments" method="post">
       <div>
         <label for="comment_name">お名前</label>
-        <input type="text" name="name" id="comment_name">
+        <input type="text" name="name" <% if @name %> value="<%= @name %>" <% end %> id="comment_name">
       </div>
       <div>
         <label for="comment_title">タイトル</label>
-        <input type="text" name="title" id="comment_title">
+        <input type="text" name="title" <% if @title %> value="<%= @title %>" <% end %> id="comment_title">
       </div>
       <div>
         <label for="comment_body">なにしてる?</label>
-        <input type="text" name="body" id="comment_body">
+        <input type="text" name="body" <% if @body %> value="<%= @body %>" <% end %> id="comment_body">
       </div>
       <input type="submit">
     </form>

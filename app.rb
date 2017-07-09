@@ -4,6 +4,7 @@ require 'bundler'
 Bundler.require
 
 set :database, {adapter: "sqlite3", database: "bbs.sqlite3"}
+enable :sessions #####
 
 class BBS < ActiveRecord::Base
   has_many :comments
@@ -45,7 +46,11 @@ end
 get '/threads/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.where(bbs_id: @bbs_thread)
+  @comments   = @bbs_thread.comments
+  @name  = session[:name] #####
+  @title = session[:title]
+  @body  = session[:body]
+  # = @bbs_thread.comments.where()
   # @comments = Comment.where(params[bbs_id: @bbs_threads])
   erb :show
 end
@@ -94,23 +99,29 @@ end
 post '/threads/:id/comments' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments = Comment.new(bbs_id: params[:id],
-                          name:   params[:name],
-                          title:  params[:title],
-                          body:   params[:body])
-  if @comments.save
-    redirect '/'
+  comment = @bbs_thread.comments.create(params.slice(:name,
+                                                     :title,
+                                                     :body))
+  # @comments = Comment.new(bbs_id: params[:id],
+  #                         name:   params[:name],
+  #                         title:  params[:title],
+  #                         body:   params[:body])
+  if comment.persisted?
+    session[:name]  = "#{params[:name]}"
+    session[:title] = "#{params[:title]}"
+    session[:body]  = "#{params[:body]}"
+    redirect back
   else
     erb :comment
   end
 end
 
 post '/clones/:id' do
-  bbs = BBS.find(params[:id])
-  ary = Array.new
-  ary << bbs.name
-      << bbs.title
-      << bbs.body
+  bbs  = BBS.find(params[:id])
+  ary  = Array.new
+  ary << bbs.name  <<
+         bbs.title <<
+         bbs.body
   ary.shuffle!
   copy_obj = BBS.new(name:  ary[0],
                      title: ary[1],
