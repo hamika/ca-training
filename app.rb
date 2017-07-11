@@ -47,7 +47,7 @@ get '/threads/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
   @bbs_thread.comments
-  @name  = session[:name]
+  @name = session[:name]
   # @title = session[:title]
   # @body  = session[:body]
   # = @bbs_thread.comments.where()
