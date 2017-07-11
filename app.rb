@@ -4,7 +4,7 @@ require 'bundler'
 Bundler.require
 
 set :database, {adapter: "sqlite3", database: "bbs.sqlite3"}
-enable :sessions #####
+enable :sessions
 
 class BBS < ActiveRecord::Base
   has_many :comments
@@ -46,10 +46,10 @@ end
 get '/threads/:id' do
   p params
   @bbs_thread = BBS.find(params[:id])
-  @comments   = @bbs_thread.comments
-  @name  = session[:name] #####
-  @title = session[:title]
-  @body  = session[:body]
+  @bbs_thread.comments
+  @name  = session[:name]
+  # @title = session[:title]
+  # @body  = session[:body]
   # = @bbs_thread.comments.where()
   # @comments = Comment.where(params[bbs_id: @bbs_threads])
   erb :show
@@ -107,9 +107,9 @@ post '/threads/:id/comments' do
   #                         title:  params[:title],
   #                         body:   params[:body])
   if comment.persisted?
-    session[:name]  = "#{params[:name]}"
-    session[:title] = "#{params[:title]}"
-    session[:body]  = "#{params[:body]}"
+    session[:name] = params[:name]
+    # session[:title] = "#{params[:title]}"
+    # session[:body]  = "#{params[:body]}"
     redirect back
   else
     erb :comment

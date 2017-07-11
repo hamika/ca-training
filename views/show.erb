@@ -20,11 +20,11 @@
       </div>
       <div>
         <label for="comment_title">タイトル</label>
-        <input type="text" name="title" <% if @title %> value="<%= @title %>" <% end %> id="comment_title">
+        <input type="text" name="title" id="comment_title">
       </div>
       <div>
         <label for="comment_body">なにしてる?</label>
-        <input type="text" name="body" <% if @body %> value="<%= @body %>" <% end %> id="comment_body">
+        <input type="text" name="body" id="comment_body">
       </div>
       <input type="submit">
     </form>
@@ -41,7 +41,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @comments.each do |comment| %>
+        <% @bbs_thread.comments.each do |comment| %>
           <tr>
             <td><%= comment.name %></td>
             <td><%= comment.title %></td>
