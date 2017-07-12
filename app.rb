@@ -8,9 +8,9 @@ enable :sessions
 
 class BBS < ActiveRecord::Base
   has_many :comments
-  # validates_presence_of :name
-  # validates_presence_of :title
-  # validates_presence_of :body
+  validates_presence_of :name
+  validates_presence_of :title
+  validates_presence_of :body
 end
 
 class Comment < ActiveRecord::Base
