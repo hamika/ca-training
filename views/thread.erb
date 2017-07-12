@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>新しいスレ</h1>
-    <form name="form" action="threads" method="post">
+    <form name="form" action="threads" method="post" onSubmit="return check()">
       <div>
         <label for="thread_name">件名</label>
         <input type="text" name="name" id="thread_name">

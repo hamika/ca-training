@@ -1,6 +1,6 @@
 'use strict';
 
-function check(){
+function check() {
   var flag = 0;
   if (document.form.name.value == ""){
     flag = 1;
@@ -21,15 +21,20 @@ function check(){
 }
 
 // 本当はこっちの文を使いたい
-// window.onload = function () {
-//   var = form = document.forms;
+// function check() {
+//   var form = document.form
+//   var flag = false;
 //   switch (form) {
-//     case form.name =="": alert("件名が未入力です!");
+//     case form.name.value == "": flag = !flag;
+//     alert("件名が未入力です!");
 //       break;
-//     case form.title =="": alert("用件が未入力です!");
+//     case form.title.value == "": flag = !flag;
+//     alert("用件が未入力です!");
 //       break;
-//     case form.body =="": alert("あなた何しているのですか???");
+//     case form.body.value == "": flag = !flag;
+//     alert("あなた何しているのですか???");
 //       break;
-//     case form =="": alert("全部入力されていません!");
+//     default form.value == "": flag = !flag;
+//     alert("全部入力されていません!");
 //   };
-// };
+// }
